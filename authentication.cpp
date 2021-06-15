@@ -4,8 +4,6 @@
 #include <QSqlQuery>
 #include <QString>
 #include <QVariant>
-#include <QDebug>
-
 
 bool auth::login(QSqlDatabase* db, QString& username, QString& password) {
     QSqlQuery query(*db);

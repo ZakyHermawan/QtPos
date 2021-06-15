@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QSqlDatabase>
 
+#include <QDebug>
+
 namespace Ui {
 class LoginForm;
 }

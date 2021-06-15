@@ -5,23 +5,10 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QString>
-#include <QDebug>
-
-//void kueri(QSqlDatabase& db) {
-//    QSqlQuery query(db);
-//    QString username, pass;
-//    username = "admin";
-//    pass = "admin";
-//    // QString sql = "select role from users where username = '" + username + "' and password = '" + pass + "';";
-
-//    query.exec("select * from users;");
-//}
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    // MainWindow w;
-
 
     QSqlDatabase db;
     db = QSqlDatabase::addDatabase("QSQLITE");
@@ -32,9 +19,6 @@ int main(int argc, char *argv[])
         qDebug() << "Connection FAIL!";
 
     LoginForm login(nullptr, &db);
-
-
-//    kueri(db);
 
 
     login.show();

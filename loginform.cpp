@@ -6,8 +6,6 @@
 #include <QString>
 #include <QSqlDatabase>
 
-#include <QDebug>
-
 LoginForm::LoginForm(QWidget *parent, QSqlDatabase* db) :
     QWidget(parent),
     ui(new Ui::LoginForm),
