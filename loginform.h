@@ -2,6 +2,7 @@
 #define LOGINFORM_H
 
 #include <QWidget>
+#include <QSqlDatabase>
 
 namespace Ui {
 class LoginForm;
@@ -12,11 +13,15 @@ class LoginForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit LoginForm(QWidget *parent = nullptr);
+    explicit LoginForm(QWidget* parent = nullptr, QSqlDatabase* db=nullptr);
     ~LoginForm();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
-    Ui::LoginForm *ui;
+    Ui::LoginForm* ui;
+    QSqlDatabase* m_db;
 };
 
 #endif // LOGINFORM_H
