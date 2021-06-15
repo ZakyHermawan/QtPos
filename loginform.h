@@ -21,6 +21,10 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_username_returnPressed();
+
+    void on_password_returnPressed();
+
 private:
     Ui::LoginForm* ui;
     QSqlDatabase* m_db;

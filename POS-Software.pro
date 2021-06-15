@@ -13,17 +13,20 @@ CONFIG += c++11
 
 
 SOURCES += \
+    administrator.cpp \
     authentication.cpp \
     loginform.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    administrator.h \
     authentication.h \
     loginform.h \
     mainwindow.h
 
 FORMS += \
+    administrator.ui \
     loginform.ui \
     mainwindow.ui
 

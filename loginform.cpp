@@ -35,8 +35,19 @@ void LoginForm::on_pushButton_clicked()
     qDebug() << "hashed pass: " << hashed_str;
     if(valid) {
         qDebug() << "valid";
+
     }
     else {
         qDebug() << "not valid";
     }
+}
+
+void LoginForm::on_username_returnPressed()
+{
+    emit this->on_pushButton_clicked();
+}
+
+void LoginForm::on_password_returnPressed()
+{
+    emit this->on_pushButton_clicked();
 }
