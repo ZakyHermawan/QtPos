@@ -29,9 +29,10 @@ void LoginForm::on_pushButton_clicked()
     password = ui->password->text();
     QByteArray hashed_pass = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5);
 
-    QString str = hashed_pass.toHex();
+    QString hashed_str = hashed_pass.toHex();
 
-    bool valid = auth::login(m_db, username, str);
+    bool valid = auth::login(m_db, username, hashed_str);
+    qDebug() << "hashed pass: " << hashed_str;
     if(valid) {
         qDebug() << "valid";
     }
