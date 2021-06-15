@@ -1,4 +1,4 @@
-#include "authentication.h"
+#include "include/authentication.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -13,14 +13,10 @@ bool auth::login(QSqlDatabase* db, QString& username, QString& hashed_password) 
     query.bindValue(":username", username);
     query.bindValue(":password", hashed_password);
 
-
-
-
     query.exec();
 
     while(query.next()) {
         QString role = query.value(0).toString();
-        qDebug() << role;
         if(role == "admin") {
             return true;
         }

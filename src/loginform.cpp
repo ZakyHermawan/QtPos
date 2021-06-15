@@ -1,13 +1,12 @@
-#include "authentication.h"
+#include "include/authentication.h"
+#include "include/loginform.h"
 
-#include "loginform.h"
 #include "ui_loginform.h"
 
 #include <QString>
 #include <QSqlDatabase>
 #include <QByteArray>
 #include <QCryptographicHash>
-#include <QTextCodec>
 
 LoginForm::LoginForm(QWidget* parent, QSqlDatabase* db) :
     QWidget(parent),

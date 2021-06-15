@@ -1,4 +1,4 @@
-#include "administrator.h"
+#include "include/administrator.h"
 #include "ui_administrator.h"
 
 #include <QString>
