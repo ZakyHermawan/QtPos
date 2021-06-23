@@ -22,6 +22,7 @@ void Client::show_client()
 
 void Client::closeEvent(QCloseEvent* event)
 {
+    // show login form
     emit this->closeSignal();
     event->accept();
 }
