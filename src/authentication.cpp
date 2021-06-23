@@ -3,7 +3,6 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QString>
-#include <QVariant>
 
 int auth::login(QSqlDatabase* db, QString& username, QString& hashed_password) {
     QSqlQuery query(*db);

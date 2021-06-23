@@ -1,10 +1,12 @@
 #include "include/client.h"
 #include "ui_client.h"
 
-Client::Client(QWidget *parent) :
+Client::Client(QWidget *parent, QSqlDatabase* db) :
     QWidget(parent),
-    ui(new Ui::Client)
+    ui(new Ui::Client),
+    m_db(db)
 {
+
     ui->setupUi(this);
 }
 

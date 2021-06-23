@@ -16,7 +16,7 @@ class LoginForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit LoginForm(QWidget* parent = nullptr, QSqlDatabase* db=nullptr);
+    explicit LoginForm(QWidget* parent = nullptr, QSqlDatabase* db = nullptr);
     ~LoginForm();
 
 private slots:

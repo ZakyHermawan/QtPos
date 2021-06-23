@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QCloseEvent>
+#include <QSqlDatabase>
 
 #include <QDebug>
 
@@ -15,7 +16,7 @@ class Client : public QWidget
     Q_OBJECT
 
 public:
-    explicit Client(QWidget *parent = nullptr);
+    explicit Client(QWidget *parent = nullptr, QSqlDatabase* db = nullptr);
     ~Client();
 
 private slots:
@@ -29,6 +30,7 @@ signals:
 
 private:
     Ui::Client *ui;
+    QSqlDatabase* m_db;
 
     void closeEvent(QCloseEvent* event);
 };
