@@ -3,11 +3,15 @@
 
 #include <QSqlQuery>
 #include <QSqlDatabase>
+#include <QListWidgetItem>
+#include <QIcon>
 
 Client::Client(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Client)
 {
+    ui->setupUi(this);
+
     QSqlQuery query(QSqlDatabase::database("goods_connection"));
     query.exec("select * from goods");
 
@@ -19,15 +23,16 @@ Client::Client(QWidget *parent) :
         QString image_path = query.value(4).toString();
         qDebug() << "id:" << index << "Nama barang:" << nama_barang << "Jumlah:" << jumlah
                  << "Harga:" << harga << "Image path:" << image_path;
+        QListWidgetItem *item = new QListWidgetItem(QIcon(":/" + image_path), nama_barang);
+        ui->listWidget->addItem(item);
         ++index;
     }
-
-    ui->setupUi(this);
 }
 
 Client::~Client()
 {
     qDebug() << "Client deleted";
+    ui->listWidget->clear();
     delete ui;
 }
 
