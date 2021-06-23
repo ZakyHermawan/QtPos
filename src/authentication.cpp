@@ -4,8 +4,8 @@
 #include <QSqlQuery>
 #include <QString>
 
-int auth::login(QSqlDatabase* db, QString& username, QString& hashed_password) {
-    QSqlQuery query(*db);
+int auth::login(QString& username, QString& hashed_password) {
+    QSqlQuery query(QSqlDatabase::database("users_connection"));
 
     query.prepare("select role from users where username=:username and password=:password");
 

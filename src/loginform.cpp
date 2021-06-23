@@ -8,10 +8,9 @@
 #include <QByteArray>
 #include <QCryptographicHash>
 
-LoginForm::LoginForm(QWidget* parent, QSqlDatabase* db) :
+LoginForm::LoginForm(QWidget* parent) :
     QWidget(parent),
-    ui(new Ui::LoginForm),
-    m_db(db)
+    ui(new Ui::LoginForm)
 {
     ui->setupUi(this);
 }
@@ -41,7 +40,7 @@ void LoginForm::on_submitButton_clicked()
 
     QString hashed_str = hashed_pass.toHex();
 
-    int code = auth::login(m_db, username, hashed_str);
+    int code = auth::login(username, hashed_str);
     qDebug() << "hashed pass: " << hashed_str;
 
 

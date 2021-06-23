@@ -2,7 +2,6 @@
 #define LOGINFORM_H
 
 #include <QWidget>
-#include <QSqlDatabase>
 #include <QKeyEvent>
 
 #include <QDebug>
@@ -16,7 +15,7 @@ class LoginForm : public QWidget
     Q_OBJECT
 
 public:
-    explicit LoginForm(QWidget* parent = nullptr, QSqlDatabase* db = nullptr);
+    explicit LoginForm(QWidget* parent = nullptr);
     ~LoginForm();
 
 private slots:
@@ -34,7 +33,6 @@ signals:
 
 private:
     Ui::LoginForm* ui;
-    QSqlDatabase* m_db;
 };
 
 #endif // LOGINFORM_H

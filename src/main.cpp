@@ -12,15 +12,18 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QSqlDatabase db;
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("D:/SourceCode/QtApp/POS-Software/databases/users.db");
-    if(db.open())
+    QSqlDatabase users_db, goods_db;
+    users_db = QSqlDatabase::addDatabase("QSQLITE", "users_connection");
+    users_db.setDatabaseName("D:/SourceCode/QtApp/something/databases/users.db");
+
+    goods_db = QSqlDatabase::addDatabase("QSQLITE", "goods_connection");
+    goods_db.setDatabaseName("D:/SourceCode/QtApp/something/databases/goods.db");
+    if(users_db.open() && goods_db.open())
         qDebug() << "Connection OK!";
     else
         qDebug() << "Connection FAIL!";
 
-    QPointer<LoginForm> login = new LoginForm(nullptr, &db);
+    QPointer<LoginForm> login = new LoginForm;
     QPointer<Administrator> admin = new Administrator;
     QPointer<Client> client = new Client;
 
