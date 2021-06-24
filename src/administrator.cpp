@@ -18,6 +18,7 @@ void Administrator::closeEvent(QCloseEvent* event)
 {
     qDebug() << "Close event";
 
+    // loginform kembali ditampilkan
     emit closeSignal();
     event->accept();
 
