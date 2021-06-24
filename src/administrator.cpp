@@ -35,7 +35,7 @@ void Administrator::admin_destroy()
 void Administrator::on_quitButton_clicked()
 {
     // close app and show login form
-    emit this->close();
+    this->close();
 }
 
 

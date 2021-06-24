@@ -30,3 +30,9 @@ void Client::client_destroy()
 {
     delete this;
 }
+
+void Client::on_quitButton_clicked()
+{
+    // close app and show login form
+    this->close();
+}

@@ -22,6 +22,8 @@ private slots:
     void show_client();
     void client_destroy();
 
+    void on_quitButton_clicked();
+
 signals:
     void closeSignal();
 
