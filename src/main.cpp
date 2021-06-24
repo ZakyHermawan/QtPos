@@ -24,8 +24,6 @@ int main(int argc, char *argv[])
     QPointer<Administrator> admin = new Administrator;
     QPointer<Client> client = new Client;
 
-    login->show();
-
     QObject::connect(login, SIGNAL(admin_login()), admin, SLOT(show_admin()));
     QObject::connect(login, SIGNAL(client_login()), client, SLOT(show_client()));
 
@@ -34,6 +32,8 @@ int main(int argc, char *argv[])
     QObject::connect(&a, SIGNAL(aboutToQuit()), client, SLOT(client_destroy()));
 
     QObject::connect(admin, SIGNAL(closeSignal()), login, SLOT(show_login()));
+
+    login->show();
 
     return a.exec();
 }
