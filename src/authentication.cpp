@@ -5,7 +5,7 @@
 #include <QString>
 #include <QVariant>
 
-bool auth::login(QSqlDatabase* db, QString& username, QString& hashed_password) {
+int auth::login(QSqlDatabase* db, QString& username, QString& hashed_password) {
     QSqlQuery query(*db);
 
     query.prepare("select role from users where username=:username and password=:password");
@@ -18,8 +18,11 @@ bool auth::login(QSqlDatabase* db, QString& username, QString& hashed_password) 
     while(query.next()) {
         QString role = query.value(0).toString();
         if(role == "admin") {
-            return true;
+            return 1;
+        }
+        else if(role ==  "user") {
+            return 2;
         }
     }
-    return false;
+    return 0;
 }

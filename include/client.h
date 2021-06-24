@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <QDebug>
+
 namespace Ui {
 class Client;
 }
@@ -14,6 +16,10 @@ class Client : public QWidget
 public:
     explicit Client(QWidget *parent = nullptr);
     ~Client();
+
+private slots:
+    void show_client();
+    void client_destroy();
 
 private:
     Ui::Client *ui;

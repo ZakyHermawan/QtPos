@@ -6,7 +6,7 @@
 #include <QDebug>
 
 namespace auth {
-    bool login(QSqlDatabase*, QString&, QString&);
+    int login(QSqlDatabase*, QString&, QString&);
 } // end namespace auth
 
 

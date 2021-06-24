@@ -23,13 +23,13 @@ void Administrator::closeEvent(QCloseEvent* event)
 
 }
 
-void Administrator::halo()
+void Administrator::show_admin()
 {
-    qDebug() << "Berhasil masuk admin!";
+    qDebug() << "Admin berhasil masuk!";
     this->show();
 }
 
-void Administrator::destroy()
+void Administrator::admin_destroy()
 {
     delete this;
 }

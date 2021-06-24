@@ -27,7 +27,7 @@ void LoginForm::show_login()
     this->show();
 }
 
-void LoginForm::destroy()
+void LoginForm::login_destroy()
 {
     delete this;
 }
@@ -41,15 +41,20 @@ void LoginForm::on_submitButton_clicked()
 
     QString hashed_str = hashed_pass.toHex();
 
-    bool valid = auth::login(m_db, username, hashed_str);
+    int code = auth::login(m_db, username, hashed_str);
     qDebug() << "hashed pass: " << hashed_str;
-    if(valid) {
-        qDebug() << "valid";
+
+
+
+    qDebug() << "Code:" << code;
+
+    if(code == 1) {
         this->hide();
         emit this->admin_login();
     }
-    else {
-        qDebug() << "not valid";
+    else if (code == 2){
+        this->hide();
+        emit this->client_login();
     }
 }
 

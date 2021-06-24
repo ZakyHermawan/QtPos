@@ -26,8 +26,8 @@ public:
     ~Administrator();
 
 private slots:
-    void halo();
-    void destroy();
+    void show_admin();
+    void admin_destroy();
 
     void on_quitButton_clicked();
 

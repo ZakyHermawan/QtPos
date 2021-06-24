@@ -21,7 +21,7 @@ public:
 
 private slots:
     void show_login();
-    void destroy();
+    void login_destroy();
 
     void keyPressEvent(QKeyEvent* event);
 
@@ -29,6 +29,7 @@ private slots:
 
 signals:
     void admin_login();
+    void client_login();
 
 
 private:
