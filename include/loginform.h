@@ -8,7 +8,7 @@
 #include <QDebug>
 
 namespace Ui {
-class LoginForm;
+    class LoginForm;
 }
 
 class LoginForm : public QWidget

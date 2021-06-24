@@ -40,6 +40,8 @@ void Administrator::on_quitButton_clicked()
     emit this->close();
 }
 
+
+/* navigate user */
 void Administrator::on_userButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
@@ -53,4 +55,22 @@ void Administrator::on_goodsButton_clicked()
 void Administrator::on_historyButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::HISTORY);
+}
+
+/* back to navigate page */
+void Administrator::on_userBack_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
+}
+
+
+void Administrator::on_goodsBack_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
+}
+
+
+void Administrator::on_historyBack_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }

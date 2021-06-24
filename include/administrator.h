@@ -37,6 +37,13 @@ private slots:
 
     void on_historyButton_clicked();
 
+    void on_userBack_clicked();
+
+    void on_goodsBack_clicked();
+
+    void on_historyBack_clicked();
+
+
 signals:
     void closeSignal();
 
