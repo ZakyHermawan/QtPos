@@ -2,6 +2,7 @@
 #define CLIENT_H
 
 #include <QWidget>
+#include <QCloseEvent>
 
 #include <QDebug>
 
@@ -21,8 +22,13 @@ private slots:
     void show_client();
     void client_destroy();
 
+signals:
+    void closeSignal();
+
 private:
     Ui::Client *ui;
+
+    void closeEvent(QCloseEvent* event);
 };
 
 #endif // CLIENT_H

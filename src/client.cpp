@@ -20,6 +20,12 @@ void Client::show_client()
     this->show();
 }
 
+void Client::closeEvent(QCloseEvent* event)
+{
+    emit this->closeSignal();
+    event->accept();
+}
+
 void Client::client_destroy()
 {
     delete this;
