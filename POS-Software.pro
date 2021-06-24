@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    include/client.cpp \
     src/administrator.cpp \
     src/authentication.cpp \
     src/loginform.cpp \
@@ -16,12 +17,14 @@ SOURCES += \
 
 HEADERS += \
     include/authentication.h \
+    include/client.h \
     include/loginform.h \
     include/administrator.h
 
 FORMS += \
     forms/loginform.ui \
-    forms/administrator.ui
+    forms/administrator.ui \
+    include/client.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
