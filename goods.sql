@@ -1,7 +1,7 @@
 CREATE TABLE goods (
 	id INTEGER PRIMARY KEY,
-	nama_barang INTEGER NOT NULL,
+	nama_barang TEXT UNIQUE NOT NULL,
 	jumlah INTEGER NOT NULL,
 	harga UNSIGNED BIG INT NOT NULL,
-	lokasi TEXT NOT NULL
+	image_path TEXT NOT NULL
 );
