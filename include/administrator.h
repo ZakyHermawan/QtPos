@@ -1,15 +1,20 @@
 #ifndef ADMINISTRATOR_H
 #define ADMINISTRATOR_H
 
+#include <QStackedWidget>
 #include <QWidget>
-
 #include <QDebug>
+
+enum AdminWindow {
+    NAVIGASI,
+    USERS
+};
 
 namespace Ui {
 class Administrator;
 }
 
-class Administrator : public QWidget
+class Administrator : public QStackedWidget
 {
     Q_OBJECT
 
@@ -22,6 +27,8 @@ private slots:
     void destroy();
 
     void on_quitButton_clicked();
+
+    void on_userButton_clicked();
 
 private:
     Ui::Administrator *ui;

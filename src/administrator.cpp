@@ -2,7 +2,7 @@
 #include "ui_administrator.h"
 
 Administrator::Administrator(QWidget *parent) :
-    QWidget(parent),
+    QStackedWidget(parent),
     ui(new Ui::Administrator)
 {
     ui->setupUi(this);
@@ -20,11 +20,17 @@ void Administrator::halo()
     this->show();
 }
 
-void Administrator::destroy() {
+void Administrator::destroy()
+{
     delete this;
 }
 
 void Administrator::on_quitButton_clicked()
 {
     emit this->close();
+}
+
+void Administrator::on_userButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
 }
