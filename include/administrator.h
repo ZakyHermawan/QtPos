@@ -1,8 +1,9 @@
 #ifndef ADMINISTRATOR_H
 #define ADMINISTRATOR_H
 
-#include <QStackedWidget>
 #include <QWidget>
+#include <QCloseEvent>
+
 #include <QDebug>
 
 enum AdminWindow {
@@ -16,7 +17,7 @@ namespace Ui {
 class Administrator;
 }
 
-class Administrator : public QStackedWidget
+class Administrator : public QWidget
 {
     Q_OBJECT
 
@@ -36,8 +37,13 @@ private slots:
 
     void on_historyButton_clicked();
 
+signals:
+    void closeSignal();
+
 private:
     Ui::Administrator *ui;
+
+    void closeEvent(QCloseEvent* event);
 };
 
 #endif // ADMINISTRATOR_H

@@ -31,5 +31,7 @@ int main(int argc, char *argv[])
     QObject::connect(&a, SIGNAL(aboutToQuit()), login, SLOT(destroy()));
     QObject::connect(&a, SIGNAL(aboutToQuit()), admin, SLOT(destroy()));
 
+    QObject::connect(admin, SIGNAL(closeSignal()), login, SLOT(show_login()));
+
     return a.exec();
 }

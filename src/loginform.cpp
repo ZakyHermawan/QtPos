@@ -22,6 +22,10 @@ LoginForm::~LoginForm()
     delete ui;
 }
 
+void LoginForm::show_login() {
+    this->show();
+}
+
 void LoginForm::destroy() {
     delete this;
 }

@@ -19,6 +19,7 @@ public:
     ~LoginForm();
 
 private slots:
+    void show_login();
     void destroy();
 
     void on_submitButton_clicked();
