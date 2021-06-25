@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QSqlDatabase>
+#include <QKeyEvent>
 
 #include <QDebug>
 
@@ -22,11 +23,9 @@ private slots:
     void show_login();
     void destroy();
 
+    void keyPressEvent(QKeyEvent* event);
+
     void on_submitButton_clicked();
-
-    void on_username_returnPressed();
-
-    void on_password_returnPressed();
 
 signals:
     void admin_login();

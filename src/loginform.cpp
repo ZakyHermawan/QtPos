@@ -22,11 +22,13 @@ LoginForm::~LoginForm()
     delete ui;
 }
 
-void LoginForm::show_login() {
+void LoginForm::show_login()
+{
     this->show();
 }
 
-void LoginForm::destroy() {
+void LoginForm::destroy()
+{
     delete this;
 }
 
@@ -51,12 +53,10 @@ void LoginForm::on_submitButton_clicked()
     }
 }
 
-void LoginForm::on_username_returnPressed()
+void LoginForm::keyPressEvent(QKeyEvent* event)
 {
-    emit this->on_submitButton_clicked();
+    if(event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
+        emit this->on_submitButton_clicked();
+    }
 }
 
-void LoginForm::on_password_returnPressed()
-{
-    emit this->on_submitButton_clicked();
-}
