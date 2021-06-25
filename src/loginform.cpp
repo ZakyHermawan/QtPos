@@ -34,6 +34,7 @@ void LoginForm::on_pushButton_clicked()
     qDebug() << "hashed pass: " << hashed_str;
     if(valid) {
         qDebug() << "valid";
+        emit this->admin_login();
 
     }
     else {

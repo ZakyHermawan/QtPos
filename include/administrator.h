@@ -2,23 +2,25 @@
 #define ADMINISTRATOR_H
 
 #include <QWidget>
-
 #include <QDebug>
 
 namespace Ui {
-class administrator;
+class Administrator;
 }
 
-class administrator : public QWidget
+class Administrator : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit administrator(QWidget *parent = nullptr);
-    ~administrator();
+    explicit Administrator(QWidget *parent = nullptr);
+    ~Administrator();
+
+private slots:
+    void halo();
 
 private:
-    Ui::administrator *ui;
+    Ui::Administrator *ui;
 };
 
 #endif // ADMINISTRATOR_H

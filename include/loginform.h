@@ -25,6 +25,9 @@ private slots:
 
     void on_password_returnPressed();
 
+signals:
+    void admin_login();
+
 private:
     Ui::LoginForm* ui;
     QSqlDatabase* m_db;

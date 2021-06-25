@@ -16,15 +16,14 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS += \
-    include/administrator.h \
     include/authentication.h \
     include/loginform.h \
-    include/mainwindow.h
+    include/mainwindow.h \
+    include/administrator.h
 
 FORMS += \
-    forms/administrator.ui \
     forms/loginform.ui \
-    forms/mainwindow.ui
+    forms/administrator.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

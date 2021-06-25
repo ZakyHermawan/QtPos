@@ -1,15 +1,15 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "include/mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QStackedWidget(parent)
 {
-    ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
 }
 
+void MainWindow::admin_logged() {
+    qDebug() << "Berhasil masuk ke halaman administrator";
+    this->setCurrentIndex(Window::ADMINISTRATOR);
+}

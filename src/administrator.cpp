@@ -1,16 +1,19 @@
 #include "include/administrator.h"
 #include "ui_administrator.h"
 
-#include <QString>
-
-administrator::administrator(QWidget *parent) :
+Administrator::Administrator(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::administrator)
+    ui(new Ui::Administrator)
 {
-
+    ui->setupUi(this);
 }
 
-administrator::~administrator()
+Administrator::~Administrator()
 {
     delete ui;
+}
+
+void Administrator::halo()
+{
+    qDebug() << "Halo!";
 }
