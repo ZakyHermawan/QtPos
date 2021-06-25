@@ -27,42 +27,42 @@
      <property name="geometry">
       <rect>
        <x>230</x>
-       <y>80</y>
+       <y>60</y>
        <width>281</width>
        <height>251</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="userButton">
         <property name="text">
          <string>Users</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="accountButton">
         <property name="text">
          <string>Account</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="goodsButton">
         <property name="text">
          <string>Goods</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_5">
+       <widget class="QPushButton" name="historyButton">
         <property name="text">
          <string>History</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="quitButton">
         <property name="text">
          <string>Quit</string>
         </property>
