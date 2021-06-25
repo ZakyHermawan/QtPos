@@ -7,7 +7,9 @@
 
 enum AdminWindow {
     NAVIGASI,
-    USERS
+    USERS,
+    GOODS,
+    HISTORY
 };
 
 namespace Ui {
@@ -29,6 +31,10 @@ private slots:
     void on_quitButton_clicked();
 
     void on_userButton_clicked();
+
+    void on_goodsButton_clicked();
+
+    void on_historyButton_clicked();
 
 private:
     Ui::Administrator *ui;

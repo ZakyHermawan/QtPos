@@ -34,3 +34,13 @@ void Administrator::on_userButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
 }
+
+void Administrator::on_goodsButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(AdminWindow::GOODS);
+}
+
+void Administrator::on_historyButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(AdminWindow::HISTORY);
+}
