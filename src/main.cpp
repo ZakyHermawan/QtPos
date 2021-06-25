@@ -1,15 +1,10 @@
-#include "include/mainwindow.h"
 #include "include/loginform.h"
 #include "include/administrator.h"
 
 
 #include <QApplication>
 #include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QString>
 #include <QPointer>
-#include <QStackedWidget>
-#include <QSize>
 
 #include <QDebug>
 

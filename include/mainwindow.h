@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QStackedWidget>
+
 #include <QDebug>
 
 enum Window {

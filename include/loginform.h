@@ -21,7 +21,7 @@ public:
 private slots:
     void destroy();
 
-    void on_pushButton_clicked();
+    void on_submitButton_clicked();
 
     void on_username_returnPressed();
 

@@ -26,7 +26,7 @@ void LoginForm::destroy() {
     delete this;
 }
 
-void LoginForm::on_pushButton_clicked()
+void LoginForm::on_submitButton_clicked()
 {
     QString username, password;
     username = ui->username->text();
@@ -49,10 +49,10 @@ void LoginForm::on_pushButton_clicked()
 
 void LoginForm::on_username_returnPressed()
 {
-    emit this->on_pushButton_clicked();
+    emit this->on_submitButton_clicked();
 }
 
 void LoginForm::on_password_returnPressed()
 {
-    emit this->on_pushButton_clicked();
+    emit this->on_submitButton_clicked();
 }
