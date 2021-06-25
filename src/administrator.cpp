@@ -10,10 +10,16 @@ Administrator::Administrator(QWidget *parent) :
 
 Administrator::~Administrator()
 {
+    qDebug() << "Administrator deleted";
     delete ui;
 }
 
 void Administrator::halo()
 {
-    qDebug() << "Halo!";
+    qDebug() << "Berhasil masuk admin!";
+    this->show();
+}
+
+void Administrator::destroy() {
+    delete this;
 }

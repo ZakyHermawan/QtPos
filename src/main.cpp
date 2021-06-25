@@ -25,25 +25,16 @@ int main(int argc, char *argv[])
     else
         qDebug() << "Connection FAIL!";
 
+    QPointer<LoginForm> login = new LoginForm(nullptr, &db);
 
-    // LoginForm login(nullptr, &db);
+    QPointer<Administrator> admin = new Administrator;
 
-    QPointer<MainWindow> stackedWidget = new MainWindow;
-    LoginForm* login = new LoginForm(stackedWidget, &db);
+    login->show();
 
-    Administrator* tmp = new Administrator(stackedWidget);
+    QObject::connect(login, SIGNAL(admin_login()), admin, SLOT(halo()));
 
-    QSize login_size = login->size();
-
-    stackedWidget->addWidget(login);
-    stackedWidget->addWidget(tmp);
-
-    stackedWidget->setCurrentWidget(login);
-    stackedWidget->setFixedSize(login_size);
-
-    stackedWidget->show();
-
-    QObject::connect(login, SIGNAL(admin_login()), stackedWidget, SLOT(admin_logged()));
+    QObject::connect(&a, SIGNAL(aboutToQuit()), login, SLOT(destroy()));
+    QObject::connect(&a, SIGNAL(aboutToQuit()), admin, SLOT(destroy()));
 
     return a.exec();
 }

@@ -18,6 +18,7 @@ public:
 
 private slots:
     void halo();
+    void destroy();
 
 private:
     Ui::Administrator *ui;

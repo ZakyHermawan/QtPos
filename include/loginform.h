@@ -19,6 +19,8 @@ public:
     ~LoginForm();
 
 private slots:
+    void destroy();
+
     void on_pushButton_clicked();
 
     void on_username_returnPressed();
@@ -27,6 +29,7 @@ private slots:
 
 signals:
     void admin_login();
+
 
 private:
     Ui::LoginForm* ui;

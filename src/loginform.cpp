@@ -18,7 +18,12 @@ LoginForm::LoginForm(QWidget* parent, QSqlDatabase* db) :
 
 LoginForm::~LoginForm()
 {
+    qDebug() << "Login form deleted";
     delete ui;
+}
+
+void LoginForm::destroy() {
+    delete this;
 }
 
 void LoginForm::on_pushButton_clicked()
@@ -34,8 +39,8 @@ void LoginForm::on_pushButton_clicked()
     qDebug() << "hashed pass: " << hashed_str;
     if(valid) {
         qDebug() << "valid";
+        this->hide();
         emit this->admin_login();
-
     }
     else {
         qDebug() << "not valid";
