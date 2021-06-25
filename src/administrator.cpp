@@ -23,3 +23,8 @@ void Administrator::halo()
 void Administrator::destroy() {
     delete this;
 }
+
+void Administrator::on_quitButton_clicked()
+{
+    emit this->close();
+}

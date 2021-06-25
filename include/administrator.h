@@ -21,6 +21,8 @@ private slots:
     void halo();
     void destroy();
 
+    void on_quitButton_clicked();
+
 private:
     Ui::Administrator *ui;
 };

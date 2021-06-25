@@ -12,13 +12,11 @@ SOURCES += \
     src/administrator.cpp \
     src/authentication.cpp \
     src/loginform.cpp \
-    src/main.cpp \
-    src/mainwindow.cpp
+    src/main.cpp
 
 HEADERS += \
     include/authentication.h \
     include/loginform.h \
-    include/mainwindow.h \
     include/administrator.h
 
 FORMS += \
