@@ -106,7 +106,14 @@ void Administrator::on_historyBack_clicked()
 
 void Administrator::on_deleteItem_clicked()
 {
+
     int current_row = ui->listWidget_2->currentRow();
+
+    // make sure there is a row that being focused
+    if(current_row == -1) {
+        return;
+    }
+
     ListGoodsItem* item_current = dynamic_cast<ListGoodsItem*>(ui->listWidget_2->takeItem(current_row));
     int id = item_current->getId();
 

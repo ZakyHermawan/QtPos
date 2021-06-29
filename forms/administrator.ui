@@ -190,16 +190,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="goodsBack">
+       <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>Back</string>
+         <string>Add Item</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="goodsBack">
         <property name="text">
-         <string>Add Item</string>
+         <string>Back</string>
         </property>
        </widget>
       </item>
