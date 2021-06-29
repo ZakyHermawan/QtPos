@@ -1,7 +1,9 @@
 #include "include/administrator.h"
 #include "ui_administrator.h"
 
+#include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QPointer>
 
 Administrator::Administrator(QWidget *parent) :
     QWidget(parent),
@@ -42,20 +44,20 @@ void Administrator::on_quitButton_clicked()
     this->close();
 }
 
-
 /* navigate user */
 void Administrator::on_userButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
 
     QSqlQuery query(QSqlDatabase::database("users_connection"));
-    query.exec("select * from users");
+    query.exec("SELECT * FROM users");
     int index = 1;
 
     while(query.next()) {
+        int id = query.value(0).toInt();
         QString username = query.value(1).toString();
         QString role = query.value(3).toString();
-        QListWidgetItem *item = new QListWidgetItem(QString(index) + " "+ username + " " + role);
+        ListGoodsItem *item = new ListGoodsItem(id, QString(index) + " "+ username + " " + role);
         ui->listWidget->addItem(item);
         ++index;
     }
@@ -66,17 +68,14 @@ void Administrator::on_goodsButton_clicked()
     ui->stackedWidget->setCurrentIndex(AdminWindow::GOODS);
     qDebug() << "goods";
     QSqlQuery query(QSqlDatabase::database("goods_connection"));
-    query.exec("select * from goods");
+    query.exec("SELECT * FROM goods");
 
     int index = 1;
     while(query.next()) {
+        int id = query.value(0).toInt();
         QString nama_barang = query.value(1).toString();
-        int jumlah = query.value(2).toInt();
-        unsigned long long int harga = query.value(3).toLongLong();
         QString image_path = query.value(4).toString();
-        qDebug() << "id:" << index << "Nama barang:" << nama_barang << "Jumlah:" << jumlah
-                 << "Harga:" << harga << "Image path:" << image_path;
-        QListWidgetItem *item = new QListWidgetItem(QIcon(":/" + image_path), nama_barang);
+        ListGoodsItem *item = new ListGoodsItem(id, QIcon(":/" + image_path), nama_barang);
         ui->listWidget_2->addItem(item);
         ++index;
     }
@@ -94,15 +93,28 @@ void Administrator::on_userBack_clicked()
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
 
-
 void Administrator::on_goodsBack_clicked()
 {
     ui->listWidget_2->clear();
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
 
-
 void Administrator::on_historyBack_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
+}
+
+void Administrator::on_deleteItem_clicked()
+{
+    int current_row = ui->listWidget_2->currentRow();
+    ListGoodsItem* item_current = dynamic_cast<ListGoodsItem*>(ui->listWidget_2->takeItem(current_row));
+    int id = item_current->getId();
+
+    QSqlQuery query(QSqlDatabase::database("goods_connection"));
+    query.prepare("DELETE FROM goods WHERE id = :id");
+    query.bindValue(":id", id);
+
+    query.exec();
+
+    delete item_current;
 }

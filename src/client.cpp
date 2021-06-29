@@ -25,16 +25,12 @@ void Client::show_client()
     qDebug() << "Client berhasil login";
 
     QSqlQuery query(QSqlDatabase::database("goods_connection"));
-    query.exec("select * from goods");
+    query.exec("SELECT * FROM goods");
 
     int index = 1;
     while(query.next()) {
         QString nama_barang = query.value(1).toString();
-        int jumlah = query.value(2).toInt();
-        unsigned long long int harga = query.value(3).toLongLong();
         QString image_path = query.value(4).toString();
-        qDebug() << "id:" << index << "Nama barang:" << nama_barang << "Jumlah:" << jumlah
-                 << "Harga:" << harga << "Image path:" << image_path;
         QListWidgetItem *item = new QListWidgetItem(QIcon(":/" + image_path), nama_barang);
         ui->listWidget->addItem(item);
         ++index;

@@ -1,6 +1,8 @@
 #ifndef ADMINISTRATOR_H
 #define ADMINISTRATOR_H
 
+#include "include/listgoodsitem.h"
+
 #include <QWidget>
 #include <QCloseEvent>
 
@@ -43,6 +45,7 @@ private slots:
 
     void on_historyBack_clicked();
 
+    void on_deleteItem_clicked();
 
 signals:
     void closeSignal();

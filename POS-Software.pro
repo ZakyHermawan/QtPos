@@ -12,6 +12,7 @@ SOURCES += \
     src/client.cpp \
     src/administrator.cpp \
     src/authentication.cpp \
+    src/listgoodsitem.cpp \
     src/loginform.cpp \
     src/main.cpp
 
@@ -19,7 +20,8 @@ HEADERS += \
     include/authentication.h \
     include/client.h \
     include/loginform.h \
-    include/administrator.h
+    include/administrator.h \
+    include/listgoodsitem.h
 
 FORMS += \
     forms/loginform.ui \

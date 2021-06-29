@@ -172,19 +172,42 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
-    <widget class="QPushButton" name="goodsBack">
+    <widget class="QWidget" name="horizontalLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>420</x>
-       <y>290</y>
-       <width>75</width>
-       <height>23</height>
+       <x>240</x>
+       <y>280</y>
+       <width>261</width>
+       <height>41</height>
       </rect>
      </property>
-     <property name="text">
-      <string>Back</string>
-     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="deleteItem">
+        <property name="text">
+         <string>Delete Item</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="goodsBack">
+        <property name="text">
+         <string>Back</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Add Item</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
+    <zorder>label_2</zorder>
+    <zorder>horizontalLayoutWidget</zorder>
+    <zorder>listWidget_2</zorder>
    </widget>
    <widget class="QWidget" name="history">
     <widget class="QListWidget" name="listWidget_3">

@@ -7,7 +7,7 @@
 int auth::login(QString& username, QString& hashed_password) {
     QSqlQuery query(QSqlDatabase::database("users_connection"));
 
-    query.prepare("select role from users where username=:username and password=:password");
+    query.prepare("SELECT role FROM users WHERE username=:username AND password=:password");
 
     query.bindValue(":username", username);
     query.bindValue(":password", hashed_password);
