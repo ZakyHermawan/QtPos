@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/listusersitem.cpp \
     src/client.cpp \
     src/administrator.cpp \
     src/authentication.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
     include/authentication.h \
     include/client.h \
+    include/listusersitem.h \
     include/loginform.h \
     include/administrator.h \
     include/listgoodsitem.h

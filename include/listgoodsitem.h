@@ -5,8 +5,6 @@
 
 #include <QDebug>
 
-class QListWidgetItem;
-
 class ListGoodsItem: public QListWidgetItem
 {
 

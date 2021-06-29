@@ -1,6 +1,9 @@
 #include "include/administrator.h"
 #include "ui_administrator.h"
 
+#include "include/listgoodsitem.h"
+#include "include/listusersitem.h"
+
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QPointer>
@@ -57,7 +60,7 @@ void Administrator::on_userButton_clicked()
         int id = query.value(0).toInt();
         QString username = query.value(1).toString();
         QString role = query.value(3).toString();
-        ListGoodsItem *item = new ListGoodsItem(id, QString(index) + " "+ username + " " + role);
+        ListUsersItem *item = new ListUsersItem(id, QString(index) + " "+ username + " " + role);
         ui->listWidget->addItem(item);
         ++index;
     }
@@ -114,8 +117,8 @@ void Administrator::on_deleteItem_clicked()
         return;
     }
 
-    ListGoodsItem* item_current = dynamic_cast<ListGoodsItem*>(ui->listWidget_2->takeItem(current_row));
-    int id = item_current->getId();
+    ListGoodsItem* current_item = dynamic_cast<ListGoodsItem* >(ui->listWidget_2->takeItem(current_row));
+    int id = current_item->getId();
 
     QSqlQuery query(QSqlDatabase::database("goods_connection"));
     query.prepare("DELETE FROM goods WHERE id = :id");
@@ -123,5 +126,28 @@ void Administrator::on_deleteItem_clicked()
 
     query.exec();
 
-    delete item_current;
+    delete current_item;
+}
+
+void Administrator::on_deleteUser_clicked()
+{
+    int current_row = ui->listWidget->currentRow();
+
+    // make sure there is a row that being focused
+    if(current_row == -1) {
+        return;
+    }
+
+    ListUsersItem* current_user = dynamic_cast<ListUsersItem* >(ui->listWidget->takeItem(current_row));
+
+    int id = current_user->getId();
+
+    QSqlQuery query(QSqlDatabase::database("users_connection"));
+
+    query.prepare("DELETE FROM users WHERE id = :id");
+    query.bindValue(":id", id);
+
+    query.exec();
+
+    delete current_user;
 }
