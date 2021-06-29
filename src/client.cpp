@@ -11,6 +11,18 @@ Client::Client(QWidget *parent) :
     ui(new Ui::Client)
 {
     ui->setupUi(this);
+}
+
+Client::~Client()
+{
+    qDebug() << "Client deleted";
+    ui->listWidget->clear();
+    delete ui;
+}
+
+void Client::show_client()
+{
+    qDebug() << "Client berhasil login";
 
     QSqlQuery query(QSqlDatabase::database("goods_connection"));
     query.exec("select * from goods");
@@ -27,18 +39,6 @@ Client::Client(QWidget *parent) :
         ui->listWidget->addItem(item);
         ++index;
     }
-}
-
-Client::~Client()
-{
-    qDebug() << "Client deleted";
-    ui->listWidget->clear();
-    delete ui;
-}
-
-void Client::show_client()
-{
-    qDebug() << "Client berhasil login";
     this->show();
 }
 

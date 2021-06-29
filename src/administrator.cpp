@@ -47,6 +47,7 @@ void Administrator::on_quitButton_clicked()
 void Administrator::on_userButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
+
     QSqlQuery query(QSqlDatabase::database("users_connection"));
     query.exec("select * from users");
     int index = 1;
@@ -58,12 +59,26 @@ void Administrator::on_userButton_clicked()
         ui->listWidget->addItem(item);
         ++index;
     }
-
 }
 
 void Administrator::on_goodsButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::GOODS);
+    QSqlQuery query(QSqlDatabase::database("goods_connection"));
+    query.exec("select * from goods");
+
+    int index = 1;
+    while(query.next()) {
+        QString nama_barang = query.value(1).toString();
+        int jumlah = query.value(2).toInt();
+        unsigned long long int harga = query.value(3).toLongLong();
+        QString image_path = query.value(4).toString();
+        qDebug() << "id:" << index << "Nama barang:" << nama_barang << "Jumlah:" << jumlah
+                 << "Harga:" << harga << "Image path:" << image_path;
+        QListWidgetItem *item = new QListWidgetItem(QIcon(":/" + image_path), nama_barang);
+        ui->listWidget->addItem(item);
+        ++index;
+    }
 }
 
 void Administrator::on_historyButton_clicked()
