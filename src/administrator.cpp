@@ -1,6 +1,8 @@
 #include "include/administrator.h"
 #include "ui_administrator.h"
 
+#include <QSqlQuery>
+
 Administrator::Administrator(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Administrator)
@@ -16,6 +18,8 @@ Administrator::~Administrator()
 
 void Administrator::closeEvent(QCloseEvent* event)
 {
+    ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
+
     // loginform kembali ditampilkan
     emit this->closeSignal();
     event->accept();
@@ -43,6 +47,18 @@ void Administrator::on_quitButton_clicked()
 void Administrator::on_userButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
+    QSqlQuery query(QSqlDatabase::database("users_connection"));
+    query.exec("select * from users");
+    int index = 1;
+
+    while(query.next()) {
+        QString username = query.value(1).toString();
+        QString role = query.value(3).toString();
+        QListWidgetItem *item = new QListWidgetItem(QString(index) + " "+ username + " " + role);
+        ui->listWidget->addItem(item);
+        ++index;
+    }
+
 }
 
 void Administrator::on_goodsButton_clicked()
@@ -58,6 +74,7 @@ void Administrator::on_historyButton_clicked()
 /* back to navigate page */
 void Administrator::on_userBack_clicked()
 {
+    ui->listWidget->clear();
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
 
