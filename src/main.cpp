@@ -7,17 +7,20 @@
 #include <QPointer>
 
 #include <QDebug>
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    QSqlDatabase users_db, goods_db;
+    QSqlDatabase users_db, goods_db, histories_db;
     users_db = QSqlDatabase::addDatabase("QSQLITE", "users_connection");
     users_db.setDatabaseName("D:/SourceCode/QtApp/something/databases/users.db");
 
     goods_db = QSqlDatabase::addDatabase("QSQLITE", "goods_connection");
     goods_db.setDatabaseName("D:/SourceCode/QtApp/something/databases/goods.db");
+
+    histories_db = QSqlDatabase::addDatabase("QSQLITE", "histories_connection");
+    histories_db.setDatabaseName("D:/SourceCode/QtApp/something/databases/histories.db");
+
     if(users_db.open() && goods_db.open())
         qDebug() << "Connection OK!";
     else

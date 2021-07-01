@@ -47,6 +47,7 @@ void Client::closeEvent(QCloseEvent* event)
 
 void Client::client_destroy()
 {
+    ui->listWidget->clear();
     delete this;
 }
 
