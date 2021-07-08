@@ -1,8 +1,11 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
+#include "include/buydialog.h"
+
 #include <QWidget>
 #include <QCloseEvent>
+#include <QPointer>
 
 #include <QDebug>
 
@@ -21,14 +24,20 @@ public:
 private slots:
     void show_client();
     void client_destroy();
+    void delete_current_goods();
+    void change_amount(int row, int amount);
 
     void on_quitButton_clicked();
 
+    void on_buyButton_clicked();
+
 signals:
     void closeSignal();
+    void openConfirmation();
 
 private:
     Ui::Client *ui;
+    QPointer<BuyDialog> m_buy_confirmation;
 
     void closeEvent(QCloseEvent* event);
 };

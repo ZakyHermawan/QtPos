@@ -3,13 +3,12 @@
 
 #include "include/listgoodsitem.h"
 #include "include/listusersitem.h"
+#include "include/query_command.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QDate>
 #include <QTime>
-
-#include <QSqlError>
 
 Administrator::Administrator(QWidget *parent) :
     QWidget(parent),
@@ -134,15 +133,8 @@ void Administrator::on_deleteItem_clicked()
     query.bindValue(":id", id);
     query.exec();
 
-    int last_id, banyak_dihapus;
-    QString operasi, nama_barang, current_date, current_time;
-
-    history_query.exec("SELECT MAX(id) from history");
-    history_query.next();
-
-    last_id = history_query.value(0).toInt();
-    current_date = QDate::currentDate().toString("dd-MM-yyyy");
-    current_time = QTime::currentTime().toString();
+    int banyak_dihapus;
+    QString operasi, nama_barang;
 
     if(query.next()) {
         QString nama_barang = query.value(1).toString();
@@ -150,14 +142,12 @@ void Administrator::on_deleteItem_clicked()
 
 
         if(jumlah == 1) {
-            banyak_dihapus =1;
+            banyak_dihapus = 1;
             operasi = "DELETE";
 
-            query.prepare("DELETE FROM goods WHERE id = :id ");
-            query.bindValue(":id", id);
-            query.exec();
+            delete_with_id("goods_connection", "goods", id);
 
-
+            // item on ui will be deleted too
             ListGoodsItem* del = dynamic_cast<ListGoodsItem* >(ui->listWidget_2->takeItem(current_row));
             delete del;
         }
@@ -173,16 +163,7 @@ void Administrator::on_deleteItem_clicked()
             operasi = "DELETE";
         }
 
-        history_query.prepare("INSERT INTO history ( id, operasi, nama_barang, jumlah, tanggal, waktu ) "
-                              "VALUES ( :id , :operasi , :nama_barang , :jumlah , :tanggal , :waktu )");
-        history_query.bindValue(":id", last_id+1);
-        history_query.bindValue(":operasi", "DELETE");
-        history_query.bindValue(":nama_barang", nama_barang);
-        history_query.bindValue(":jumlah", banyak_dihapus);
-        history_query.bindValue(":tanggal", current_date);
-        history_query.bindValue(":waktu", current_time);
-
-        history_query.exec();
+        add_history(operasi, nama_barang, banyak_dihapus);
     }
 }
 

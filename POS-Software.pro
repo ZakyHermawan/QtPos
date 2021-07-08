@@ -9,13 +9,15 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/buydialog.cpp \
     src/listusersitem.cpp \
     src/client.cpp \
     src/administrator.cpp \
     src/authentication.cpp \
     src/listgoodsitem.cpp \
     src/loginform.cpp \
-    src/main.cpp
+    src/main.cpp \
+    src/query_command.cpp
 
 HEADERS += \
     include/authentication.h \
@@ -23,12 +25,15 @@ HEADERS += \
     include/listusersitem.h \
     include/loginform.h \
     include/administrator.h \
-    include/listgoodsitem.h
+    include/listgoodsitem.h \
+    include/buydialog.h \
+    include/query_command.h
 
 FORMS += \
     forms/loginform.ui \
     forms/administrator.ui \
-    forms/client.ui
+    forms/client.ui \
+    forms/buydialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

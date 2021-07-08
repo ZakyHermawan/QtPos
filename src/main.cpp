@@ -1,6 +1,7 @@
 #include "include/loginform.h"
 #include "include/administrator.h"
 #include "include/client.h"
+#include "include/buydialog.h"
 
 #include <QApplication>
 #include <QSqlDatabase>
@@ -39,6 +40,7 @@ int main(int argc, char *argv[])
 
     QObject::connect(admin, SIGNAL(closeSignal()), login, SLOT(show_login()));
     QObject::connect(client, SIGNAL(closeSignal()), login, SLOT(show_login()));
+
 
     login->show();
 
