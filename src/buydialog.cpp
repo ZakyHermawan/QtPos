@@ -56,14 +56,17 @@ void BuyDialog::on_buttonBox_accepted()
         int jumlah = query.value(2).toInt();
 
         if(spinbox_val == 0) {
+            ui->errorMessage->setText(" ");
             return;
         }
 
         if(spinbox_val > jumlah) {
-            qDebug() << "Jumlah barang tidak cukup";
+            ui->errorMessage->setStyleSheet("QLabel#errorMessage {color: red}");
+            ui->errorMessage->setText("Jumlah barang kurang");
         }
 
         else {
+            ui->errorMessage->setText(" ");
             int sisa = jumlah - spinbox_val;
 
             if(sisa == 0) {
