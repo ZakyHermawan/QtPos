@@ -90,6 +90,30 @@ void Administrator::on_goodsButton_clicked()
 void Administrator::on_historyButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::HISTORY);
+
+    QSqlQuery query(QSqlDatabase::database("histories_connection"));
+    query.exec("SELECT * FROM history");
+    int index = 1;
+
+    while(query.next()) {
+        int id = query.value(0).toInt();
+        QString operasi = query.value(1).toString();
+        QString nama_barang = query.value(2).toString();
+        int jumlah = query.value(3).toInt();
+        QString tanggal = query.value(4).toString();
+        QString waktu = query.value(5).toString();
+
+        ListGoodsItem *item = new ListGoodsItem(id, QString("%1 %2 %3 %4 %5 %6")
+                              .arg(index)
+                              .arg(operasi)
+                              .arg(nama_barang)
+                              .arg(jumlah)
+                              .arg(tanggal)
+                              .arg(waktu)
+        );
+        ui->listWidget_3->addItem(item);
+        ++index;
+    }
 }
 
 /* back to navigate page */
@@ -107,10 +131,9 @@ void Administrator::on_goodsBack_clicked()
 
 void Administrator::on_historyBack_clicked()
 {
+    ui->listWidget_3->clear();
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
-
-
 
 void Administrator::on_deleteItem_clicked()
 {
