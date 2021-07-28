@@ -42,3 +42,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES += \
+    .gitignore \
+    databases/goods.db \
+    databases/histories.db \
+    databases/users.db \
+    sql/goods.sql \
+    sql/history.sql \
+    sql/sample_goods.sql \
+    sql/sample_users.sql \
+    sql/users.sql
