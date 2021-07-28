@@ -1,4 +1,4 @@
-#include "include/client.h"
+#include "client.h"
 #include "ui_client.h"
 
 #include "include/listgoodsitem.h"

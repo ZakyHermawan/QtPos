@@ -1,7 +1,7 @@
-#include "include/loginform.h"
-#include "include/administrator.h"
-#include "include/client.h"
-#include "include/buydialog.h"
+#include "loginform.h"
+#include "administrator.h"
+#include "client.h"
+#include "buydialog.h"
 
 #include <QApplication>
 #include <QSqlDatabase>

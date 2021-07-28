@@ -1,4 +1,4 @@
-#include "include/listgoodsitem.h"
+#include "listgoodsitem.h"
 
 ListGoodsItem::ListGoodsItem(int id, const QListWidgetItem &other)
     : QListWidgetItem(other), m_id(id)

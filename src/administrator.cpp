@@ -1,9 +1,9 @@
-#include "include/administrator.h"
+#include "administrator.h"
 #include "ui_administrator.h"
 
-#include "include/listgoodsitem.h"
-#include "include/listusersitem.h"
-#include "include/query_command.h"
+#include "listgoodsitem.h"
+#include "listusersitem.h"
+#include "query_command.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>

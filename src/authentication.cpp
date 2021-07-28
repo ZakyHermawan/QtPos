@@ -1,4 +1,4 @@
-#include "include/authentication.h"
+#include "authentication.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>

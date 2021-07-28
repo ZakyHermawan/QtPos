@@ -1,4 +1,4 @@
-#include "include/buydialog.h"
+#include "buydialog.h"
 #include "ui_buydialog.h"
 
 #include "include/query_command.h"

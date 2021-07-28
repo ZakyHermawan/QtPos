@@ -1,4 +1,4 @@
-#include "include/query_command.h"
+#include "query_command.h"
 
 #include <QVariant>
 
