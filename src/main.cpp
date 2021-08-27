@@ -7,6 +7,8 @@
 #include <QSqlDatabase>
 #include <QPointer>
 
+#include <memory>
+
 #include <QDebug>
 int main(int argc, char *argv[])
 {
@@ -34,15 +36,15 @@ int main(int argc, char *argv[])
     QObject::connect(login, SIGNAL(admin_login()), admin, SLOT(show_admin()));
     QObject::connect(login, SIGNAL(client_login()), client, SLOT(show_client()));
 
-    QObject::connect(&a, SIGNAL(aboutToQuit()), login, SLOT(login_destroy()));
-    QObject::connect(&a, SIGNAL(aboutToQuit()), admin, SLOT(admin_destroy()));
-    QObject::connect(&a, SIGNAL(aboutToQuit()), client, SLOT(client_destroy()));
-
     QObject::connect(admin, SIGNAL(closeSignal()), login, SLOT(show_login()));
     QObject::connect(client, SIGNAL(closeSignal()), login, SLOT(show_login()));
 
-
     login->show();
 
-    return a.exec();
+    a.exec();
+
+    delete client;
+    delete login;
+    delete admin;
+    return 0;
 }

@@ -27,10 +27,6 @@ ListGoodsItem::ListGoodsItem(int id, QListWidget *parent, int type)
 
 }
 
-ListGoodsItem::~ListGoodsItem()
-{
-
-}
 
 int ListGoodsItem::getId()
 {

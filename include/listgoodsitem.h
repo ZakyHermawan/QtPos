@@ -18,7 +18,7 @@ public:
     ListGoodsItem(int id, const QString &text, QListWidget *parent = nullptr, int type = Type);
     ListGoodsItem(int id, QListWidget *parent = nullptr, int type = Type);
 
-    ~ListGoodsItem();
+    virtual ~ListGoodsItem() = default;
 
     int getId();
 

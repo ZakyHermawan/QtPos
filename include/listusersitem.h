@@ -18,7 +18,7 @@ public:
     ListUsersItem(int id, const QString &text, QListWidget *parent = nullptr, int type = Type);
     ListUsersItem(int id, QListWidget *parent = nullptr, int type = Type);
 
-    ~ListUsersItem();
+    virtual ~ListUsersItem() = default;
 
     int getId();
 

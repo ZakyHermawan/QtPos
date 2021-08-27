@@ -1,8 +1,8 @@
-#include "client.h"
 #include "ui_client.h"
 
-#include "include/listgoodsitem.h"
-#include "include/listusersitem.h"
+#include "client.h"
+#include "listgoodsitem.h"
+#include "listusersitem.h"
 
 #include <QIcon>
 #include <QSqlQuery>
@@ -15,6 +15,8 @@ Client::Client(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Client)
 {
+    m_buy_confirmation = new BuyDialog(this);
+
     ui->setupUi(this);
 }
 
@@ -23,7 +25,6 @@ Client::~Client()
     qDebug() << "Client deleted";
     ui->listWidget->clear();
 
-    delete m_buy_confirmation;
     delete ui;
 }
 
@@ -51,6 +52,7 @@ void Client::show_client()
         QString image_path = query.value(4).toString();
         ListGoodsItem *item = new ListGoodsItem(id, QIcon(":/" + image_path), nama_barang + " " + QString::number(jumlah));
         ui->listWidget->addItem(item);
+
         ++index;
     }
     this->show();
@@ -65,27 +67,16 @@ void Client::change_amount(int row, int amount)
     list[1] = QString::number(amount);
     text = list[0] + " " + list[1];
     item->setText(text);
-
 }
 
 void Client::closeEvent(QCloseEvent* event)
 {
-    if(m_buy_confirmation != nullptr) {
-        delete m_buy_confirmation;
-        m_buy_confirmation = nullptr;
-    }
-
+    m_buy_confirmation->close();
     ui->listWidget->clear();
 
     // show login form
     emit this->closeSignal();
     event->accept();
-}
-
-void Client::client_destroy()
-{
-    ui->listWidget->clear();
-    delete this;
 }
 
 void Client::on_quitButton_clicked()
@@ -107,8 +98,8 @@ void Client::on_buyButton_clicked()
     int id = goods->getId();
 
 
-    m_buy_confirmation = new BuyDialog(this, id, current_row);
-    m_buy_confirmation->setAttribute(Qt::WA_DeleteOnClose);
+    m_buy_confirmation->setId(id);
+    m_buy_confirmation->setRow(current_row);
 
     QObject::connect(this, SIGNAL(openConfirmation()), m_buy_confirmation, SLOT(show_dialog()));
     QObject::connect(m_buy_confirmation, SIGNAL(soldOut()), this, SLOT(delete_current_goods()));

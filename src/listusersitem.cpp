@@ -27,11 +27,6 @@ ListUsersItem::ListUsersItem(int id, QListWidget *parent, int type)
 
 }
 
-ListUsersItem::~ListUsersItem()
-{
-
-}
-
 int ListUsersItem::getId()
 {
     return m_id;

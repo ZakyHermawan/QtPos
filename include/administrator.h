@@ -1,8 +1,12 @@
 #ifndef ADMINISTRATOR_H
 #define ADMINISTRATOR_H
-
+#include "goodsmodel.h"
 #include <QWidget>
+#include <QTableView>
+#include <QSqlTableModel>
+#include <QStandardItemModel>
 #include <QCloseEvent>
+#include <QPointer>
 
 #include <QDebug>
 
@@ -23,11 +27,10 @@ class Administrator : public QWidget
 
 public:
     explicit Administrator(QWidget *parent = nullptr);
-    ~Administrator();
+    virtual ~Administrator();
 
 private slots:
     void show_admin();
-    void admin_destroy();
 
     void on_quitButton_clicked();
 
@@ -47,11 +50,18 @@ private slots:
 
     void on_deleteUser_clicked();
 
+    void on_deleteHistory_clicked();
+
+    void on_addUser_clicked();
+
 signals:
     void closeSignal();
 
 private:
     Ui::Administrator *ui;
+    QPointer<QSqlTableModel> m_userModel;
+    QPointer<GoodsModel> m_goodsModel;
+    QPointer<QSqlTableModel> m_historyModel;
 
     void closeEvent(QCloseEvent* event);
 };

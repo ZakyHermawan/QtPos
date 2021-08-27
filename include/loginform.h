@@ -16,11 +16,10 @@ class LoginForm : public QWidget
 
 public:
     explicit LoginForm(QWidget* parent = nullptr);
-    ~LoginForm();
+    virtual ~LoginForm();
 
 private slots:
     void show_login();
-    void login_destroy();
 
     void keyPressEvent(QKeyEvent* event);
 

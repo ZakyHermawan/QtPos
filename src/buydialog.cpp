@@ -1,27 +1,52 @@
 #include "buydialog.h"
 #include "ui_buydialog.h"
 
-#include "include/query_command.h"
+#include "query_command.h"
 
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QDate>
 #include <QTime>
 
-BuyDialog::BuyDialog(QWidget *parent, int id, int row) :
+BuyDialog::BuyDialog(QWidget* parent, int id, int row) :
     QDialog(parent),
     ui(new Ui::BuyDialog),
-    m_goods_id(id),
-    m_current_row(row)
+    m_goodsId(id),
+    m_currentRow(row)
 {
-    qDebug() << "buy dialog constructed";
     ui->setupUi(this);
+}
+
+BuyDialog::BuyDialog(QWidget* parent) :
+    BuyDialog(parent, 0, 0)
+{
+
 }
 
 BuyDialog::~BuyDialog()
 {
     qDebug() << "Buy dialog destroyed";
     delete ui;
+}
+
+void BuyDialog::setId(int id)
+{
+    m_goodsId = id;
+}
+
+void BuyDialog::setRow(int row)
+{
+    m_currentRow = row;
+}
+
+int BuyDialog::getId()
+{
+    return m_goodsId;
+}
+
+int BuyDialog::getRow()
+{
+    return m_currentRow;
 }
 
 bool BuyDialog::eventFilter(QObject* obj, QEvent* event)
@@ -44,7 +69,7 @@ void BuyDialog::on_buttonBox_accepted()
     QSqlQuery query(QSqlDatabase::database("goods_connection"));
 
     query.prepare("SELECT * FROM goods WHERE id = :id");
-    query.bindValue(":id", m_goods_id);
+    query.bindValue(":id", m_goodsId);
     query.exec();
 
     int spinbox_val = ui->spinBox->value();
@@ -70,7 +95,7 @@ void BuyDialog::on_buttonBox_accepted()
             int sisa = jumlah - spinbox_val;
 
             if(sisa == 0) {
-                delete_with_id("goods_connection", "goods", m_goods_id);
+                delete_with_id("goods_connection", "goods", m_goodsId);
                 emit this->soldOut();
                 add_history("BUY", nama_barang, spinbox_val);
                 this->close();
@@ -78,11 +103,11 @@ void BuyDialog::on_buttonBox_accepted()
 
             else {
                 query.prepare(QString("UPDATE goods SET jumlah = %1 WHERE id = :id").arg(sisa));
-                query.bindValue(":id", m_goods_id);
+                query.bindValue(":id", m_goodsId);
                 query.exec();
 
                 add_history("BUY", nama_barang, spinbox_val);
-                emit this->buyFew(m_current_row, sisa);
+                emit this->buyFew(m_currentRow, sisa);
             }
         }
     }

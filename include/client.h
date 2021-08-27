@@ -1,12 +1,11 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "include/buydialog.h"
+#include "buydialog.h"
 
 #include <QWidget>
 #include <QCloseEvent>
 #include <QPointer>
-
 #include <QDebug>
 
 namespace Ui {
@@ -19,11 +18,10 @@ class Client : public QWidget
 
 public:
     explicit Client(QWidget *parent = nullptr);
-    ~Client();
+    virtual ~Client();
 
 private slots:
     void show_client();
-    void client_destroy();
     void delete_current_goods();
     void change_amount(int row, int amount);
 
@@ -38,7 +36,6 @@ signals:
 private:
     Ui::Client *ui;
     QPointer<BuyDialog> m_buy_confirmation;
-
     void closeEvent(QCloseEvent* event);
 };
 

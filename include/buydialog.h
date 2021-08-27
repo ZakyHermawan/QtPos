@@ -16,8 +16,16 @@ class BuyDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BuyDialog(QWidget *parent = nullptr, int id=0, int row=0);
-    ~BuyDialog();
+    explicit BuyDialog(QWidget *parent = nullptr);
+    explicit BuyDialog(QWidget *parent, int id, int row);
+
+    void setId(int id);
+    void setRow(int row);
+
+    int getId();
+    int getRow();
+
+    virtual ~BuyDialog();
 
 private slots:
     bool eventFilter(QObject* obj=nullptr, QEvent* event=nullptr);
@@ -35,8 +43,8 @@ signals:
 
 private:
     Ui::BuyDialog *ui;
-    int m_goods_id;
-    int m_current_row;
+    int m_goodsId;
+    int m_currentRow;
 };
 
 #endif // BUYDIALOG_H

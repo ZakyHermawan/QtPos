@@ -26,11 +26,6 @@ void LoginForm::show_login()
     this->show();
 }
 
-void LoginForm::login_destroy()
-{
-    delete this;
-}
-
 void LoginForm::on_submitButton_clicked()
 {
     QString username, password;
@@ -39,10 +34,9 @@ void LoginForm::on_submitButton_clicked()
     QByteArray hashed_pass = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5);
 
     QString hashed_str = hashed_pass.toHex();
+    qDebug() << "hashed password:" << hashed_str;
 
     int code = auth::login(username, hashed_str);
-    qDebug() << "hashed pass: " << hashed_str;
-
 
 
     qDebug() << "Code:" << code;

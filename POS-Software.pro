@@ -12,6 +12,7 @@ INCLUDEPATH += include/
 
 SOURCES += \
     src/buydialog.cpp \
+    src/goodsmodel.cpp \
     src/listusersitem.cpp \
     src/client.cpp \
     src/administrator.cpp \
@@ -19,17 +20,18 @@ SOURCES += \
     src/listgoodsitem.cpp \
     src/loginform.cpp \
     src/main.cpp \
-    src/query_command.cpp
+    src/query_command.cpp \
 
 HEADERS += \
     include/authentication.h \
     include/client.h \
+    include/goodsmodel.h \
     include/listusersitem.h \
     include/loginform.h \
     include/administrator.h \
     include/listgoodsitem.h \
     include/buydialog.h \
-    include/query_command.h
+    include/query_command.h \
 
 FORMS += \
     forms/loginform.ui \
@@ -55,3 +57,4 @@ DISTFILES += \
     sql/sample_goods.sql \
     sql/sample_users.sql \
     sql/users.sql
+

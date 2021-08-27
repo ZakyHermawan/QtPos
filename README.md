@@ -2,6 +2,5 @@
 POS application built with Qt Widgets
 
 # TODO
-* [ ] Use TableView
-* [ ] Change to Model/View architecture
-* [ ] Add Unit Test
+* [ x ] Use TableView
+* [ x ] Change to Model/View architecture

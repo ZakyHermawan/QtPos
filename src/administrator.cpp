@@ -1,25 +1,61 @@
-#include "administrator.h"
 #include "ui_administrator.h"
 
+#include "administrator.h"
 #include "listgoodsitem.h"
 #include "listusersitem.h"
 #include "query_command.h"
 
 #include <QSqlDatabase>
+#include <QSqlRecord>
 #include <QSqlQuery>
-#include <QDate>
-#include <QTime>
+#include <QModelIndexList>
+#include <QStandardItem>
+#include <QList>
+#include <QSqlRecord>
 
 Administrator::Administrator(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Administrator)
+    ui(new Ui::Administrator),
+    m_userModel(new QSqlTableModel(this , QSqlDatabase::database("users_connection"))),
+    m_goodsModel(new GoodsModel(this, QSqlDatabase::database("goods_connection"))),
+    m_historyModel(new QSqlTableModel(this, QSqlDatabase::database("histories_connection")))
 {
     ui->setupUi(this);
+    m_userModel->setTable("users");
+    m_userModel->setEditStrategy(QSqlTableModel::OnFieldChange);
+    m_userModel->select();
+
+    m_historyModel->setTable("history");
+    m_historyModel->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    m_historyModel->select();
+
+    m_goodsModel->setTable("goods");
+
+    m_goodsModel->setEditStrategy(QSqlTableModel::OnFieldChange);
+    m_goodsModel->select();
+    m_goodsModel->setHeaderData(0, Qt::Horizontal, tr("image"));
+
+    ui->usersTableView->setModel(m_userModel);
+    ui->usersTableView->horizontalHeader()->setStretchLastSection(true);
+    ui->usersTableView->hideColumn(0);
+    ui->usersTableView->hideColumn(2);
+
+    ui->historiesTableView->setModel(m_historyModel);
+    ui->historiesTableView->horizontalHeader()->setStretchLastSection(true);
+    ui->historiesTableView->hideColumn(0);
+
+    ui->goodsTableView->setModel(m_goodsModel);
+    ui->goodsTableView->horizontalHeader()->setStretchLastSection(true);
+    ui->goodsTableView->hideColumn(0);
+
+    ui->goodsTableView->resizeColumnToContents(4);
+    ui->goodsTableView->resizeRowsToContents();
 }
 
 Administrator::~Administrator()
 {
     qDebug() << "Administrator deleted";
+
     delete ui;
 }
 
@@ -38,11 +74,6 @@ void Administrator::show_admin()
     this->show();
 }
 
-void Administrator::admin_destroy()
-{
-    delete this;
-}
-
 void Administrator::on_quitButton_clicked()
 {
     // close app and show login form
@@ -53,162 +84,71 @@ void Administrator::on_quitButton_clicked()
 void Administrator::on_userButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::USERS);
-
-    QSqlQuery query(QSqlDatabase::database("users_connection"));
-    query.exec("SELECT * FROM users");
-    int index = 1;
-
-    while(query.next()) {
-        int id = query.value(0).toInt();
-        QString username = query.value(1).toString();
-        QString role = query.value(3).toString();
-        ListUsersItem *item = new ListUsersItem(id, QString(index) + " "+ username + " " + role);
-        ui->listWidget->addItem(item);
-        ++index;
-    }
 }
 
 void Administrator::on_goodsButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::GOODS);
-    qDebug() << "goods";
-    QSqlQuery query(QSqlDatabase::database("goods_connection"));
-    query.exec("SELECT * FROM goods");
-
-    int index = 1;
-    while(query.next()) {
-        int id = query.value(0).toInt();
-        QString nama_barang = query.value(1).toString();
-        QString jumlah = query.value(2).toString();
-        QString image_path = query.value(4).toString();
-        ListGoodsItem *item = new ListGoodsItem(id, QIcon(":/" + image_path), nama_barang+ " " + jumlah);
-        ui->listWidget_2->addItem(item);
-        ++index;
-    }
 }
 
 void Administrator::on_historyButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(AdminWindow::HISTORY);
-
-    QSqlQuery query(QSqlDatabase::database("histories_connection"));
-    query.exec("SELECT * FROM history");
-    int index = 1;
-
-    while(query.next()) {
-        int id = query.value(0).toInt();
-        QString operasi = query.value(1).toString();
-        QString nama_barang = query.value(2).toString();
-        int jumlah = query.value(3).toInt();
-        QString tanggal = query.value(4).toString();
-        QString waktu = query.value(5).toString();
-
-        ListGoodsItem *item = new ListGoodsItem(id, QString("%1 %2 %3 %4 %5 %6")
-                              .arg(index)
-                              .arg(operasi)
-                              .arg(nama_barang)
-                              .arg(jumlah)
-                              .arg(tanggal)
-                              .arg(waktu)
-        );
-        ui->listWidget_3->addItem(item);
-        ++index;
-    }
 }
 
 /* back to navigate page */
 void Administrator::on_userBack_clicked()
 {
-    ui->listWidget->clear();
+    ui->usersTableView->clearSpans();
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
 
 void Administrator::on_goodsBack_clicked()
 {
-    ui->listWidget_2->clear();
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
 
 void Administrator::on_historyBack_clicked()
 {
-    ui->listWidget_3->clear();
     ui->stackedWidget->setCurrentIndex(AdminWindow::NAVIGASI);
 }
 
+// TODO write to history
 void Administrator::on_deleteItem_clicked()
 {
 
-    int current_row = ui->listWidget_2->currentRow();
-
-    // make sure there is a row that being focused
-    if(current_row == -1) {
-        return;
-    }
-
-    ListGoodsItem* current_item = dynamic_cast<ListGoodsItem* >(ui->listWidget_2->currentItem());
-    int id = current_item->getId();
-
-
-    QSqlQuery query(QSqlDatabase::database("goods_connection"));
-    QSqlQuery history_query(QSqlDatabase::database("histories_connection"));
-
-    query.prepare("SELECT * FROM goods WHERE id = :id");
-    query.bindValue(":id", id);
-    query.exec();
-
-    int banyak_dihapus;
-    QString operasi, nama_barang;
-
-    if(query.next()) {
-        QString nama_barang = query.value(1).toString();
-        int jumlah = query.value(2).toInt();
-
-
-        if(jumlah == 1) {
-            banyak_dihapus = 1;
-            operasi = "DELETE";
-
-            delete_with_id("goods_connection", "goods", id);
-
-            // item on ui will be deleted too
-            ListGoodsItem* del = dynamic_cast<ListGoodsItem* >(ui->listWidget_2->takeItem(current_row));
-            delete del;
-        }
-        else {
-            jumlah = jumlah - 1;
-
-            query.prepare(QString("UPDATE goods SET jumlah = %1 WHERE id = :id").arg(QString::number(jumlah)));
-            query.bindValue(":id", id);
-            query.exec();
-            current_item->setText(nama_barang + " " + QString::number(jumlah));
-
-            banyak_dihapus = 1;
-            operasi = "DELETE";
-        }
-
-        add_history(operasi, nama_barang, banyak_dihapus);
-    }
 }
 
 void Administrator::on_deleteUser_clicked()
 {
-    int current_row = ui->listWidget->currentRow();
+    QModelIndexList lst = ui->usersTableView->selectionModel()->selectedIndexes();
 
-    // make sure there is a row that being focused
-    if(current_row == -1) {
-        return;
+    if(!lst.isEmpty()) {
+        int row = lst.first().row();
+        m_userModel->removeRow(row);
+        m_userModel->select();
+    }
+    else{
+        qDebug() << "tidak ada item yang dipilih";
+    }
+    ui->usersTableView->clearSelection();
+}
+
+void Administrator::on_deleteHistory_clicked()
+{
+    QModelIndexList lst = ui->historiesTableView->selectionModel()->selectedIndexes();
+    int size = lst.size();
+
+    if(!lst.isEmpty()) {
+        m_historyModel->removeRows(lst.first().row(), size);
+        m_historyModel->submitAll();
     }
 
-    ListUsersItem* current_user = dynamic_cast<ListUsersItem* >(ui->listWidget->takeItem(current_row));
+    ui->usersTableView->clearSelection();
+}
 
-    int id = current_user->getId();
-
-    QSqlQuery query(QSqlDatabase::database("users_connection"));
-
-    query.prepare("SELECT * FROM users WHERE id = :id");
-    query.bindValue(":id", id);
-
-    query.exec();
-
-    delete current_user;
+//TODO, show dialogbox to register a user
+void Administrator::on_addUser_clicked()
+{
+    return;
 }

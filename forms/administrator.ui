@@ -91,16 +91,6 @@
     </widget>
    </widget>
    <widget class="QWidget" name="users">
-    <widget class="QListWidget" name="listWidget">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>90</y>
-       <width>256</width>
-       <height>192</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
@@ -142,9 +132,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="addUser">
         <property name="text">
-         <string>Edit</string>
+         <string>Add</string>
         </property>
        </widget>
       </item>
@@ -157,23 +147,23 @@
       </item>
      </layout>
     </widget>
-   </widget>
-   <widget class="QWidget" name="goods">
-    <widget class="QListWidget" name="listWidget_2">
+    <widget class="QTableView" name="usersTableView">
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>90</y>
-       <width>256</width>
+       <y>80</y>
+       <width>261</width>
        <height>192</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="goods">
     <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>49</y>
+       <y>20</y>
        <width>251</width>
        <height>31</height>
       </rect>
@@ -196,7 +186,7 @@
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>280</y>
+       <y>310</y>
        <width>251</width>
        <height>41</height>
       </rect>
@@ -225,21 +215,18 @@
       </item>
      </layout>
     </widget>
-    <zorder>label_2</zorder>
-    <zorder>horizontalLayoutWidget</zorder>
-    <zorder>listWidget_2</zorder>
-   </widget>
-   <widget class="QWidget" name="history">
-    <widget class="QListWidget" name="listWidget_3">
+    <widget class="QTableView" name="goodsTableView">
      <property name="geometry">
       <rect>
-       <x>240</x>
-       <y>90</y>
-       <width>256</width>
-       <height>192</height>
+       <x>180</x>
+       <y>60</y>
+       <width>381</width>
+       <height>241</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QWidget" name="history">
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
@@ -263,13 +250,42 @@
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+    <widget class="QTableView" name="historiesTableView">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>90</y>
+       <width>441</width>
+       <height>192</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="deleteHistory">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>290</y>
+       <width>141</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">height: inherit;</string>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
     <widget class="QPushButton" name="historyBack">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>450</x>
        <y>290</y>
-       <width>75</width>
-       <height>23</height>
+       <width>141</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="text">
